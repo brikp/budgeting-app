@@ -14,6 +14,15 @@ export const getTransactions = (store) => (
   getTransactionList(store).map((id) => getTransactionsById(store, id))
 );
 
+export const getTransactionIdsOfCategory = (store, categoryId) => (
+  getTransactions(store)
+    .reduce((result, transaction) => {
+      if (transaction && transaction.category === categoryId) {
+        return [...result, transaction.id];
+      } return result;
+    }, [])
+);
+
 export const getCategoryList = (store) => (
   store && store.categories
     ? store.categories.allIds
@@ -31,5 +40,5 @@ export const getCategories = (store) => (
 );
 
 export const getCategoryNames = (store) => (
-  getCategoryList(store).map((id) => store.categories.byId[id].name)
+  getCategoryList(store).map((id) => store.categories.byIds[id].name)
 );

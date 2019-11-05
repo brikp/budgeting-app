@@ -3,7 +3,7 @@ import { ADD_TRANSACTION_ENTRY, MODIFY_TRANSACTION_CATEGORY, MODIFY_TRANSACTION_
 let nextTransactionId = 0;
 let nextCategoryId = 0;
 
-export const addTransaction = (category, amount) => {
+export const addTransactionEntry = (category, amount) => {
   nextTransactionId += 1;
   return {
     type: ADD_TRANSACTION_ENTRY,
@@ -31,14 +31,14 @@ export const modifyTransactionAmount = (id, newAmount) => ({
   },
 });
 
-export const removeTransaction = (id) => ({
+export const removeTransactionEntry = (id) => ({
   type: REMOVE_TRANSACTION_ENTRY,
   payload: {
     id,
   },
 });
 
-export const addCategory = (name) => {
+export const addCategoryEntry = (name) => {
   nextCategoryId += 1;
   return {
     type: ADD_CATEGORY_ENTRY,
@@ -65,7 +65,7 @@ export const modifyCategoryBalance = (id, balanceChange) => ({
   },
 });
 
-export const removeCategory = (id) => ({
+export const removeCategoryEntry = (id) => ({
   type: REMOVE_CATEGORY_ENTRY,
   payload: {
     id,

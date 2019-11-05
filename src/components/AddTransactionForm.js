@@ -2,39 +2,30 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { addTransaction } from '../redux/actionsSimple';
-import { getCategoryNames } from '../redux/selectors';
+import { addTransaction } from '../redux/actionsThunk';
 
 const AddTransactionForm = (props) => {
-  const { allCategories } = props;
-  console.log(allCategories);
-
   const handleAddTran = (name) => {
-    if (allCategories.includes(name)) {
-      props.addTransaction(name, 100);
-    } else {
-      console.log('Category not on the list!');
-    }
+    props.addTransaction(name, 100);
   };
 
   return (
     <div>
-      <button type="submit" onClick={() => handleAddTran('Test')}>
-        Add Test category transaction
+      <button type="submit" onClick={() => handleAddTran(102)}>
+        Add Rent category transaction
       </button>
-      <button type="submit" onClick={() => handleAddTran('Dummy')}>
-        Add Dummy category transaction
+      <button type="submit" onClick={() => handleAddTran(101)}>
+        Add Food category transaction
       </button>
     </div>
   );
 };
 
 AddTransactionForm.propTypes = {
-  allCategories: PropTypes.arrayOf(PropTypes.string).isRequired,
   addTransaction: PropTypes.func.isRequired,
 };
 
 export default connect(
-  (state) => ({ allCategories: getCategoryNames(state) }),
+  null,
   { addTransaction },
 )(AddTransactionForm);

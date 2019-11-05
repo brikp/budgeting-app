@@ -3,17 +3,18 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import Transaction from './Transaction';
-import { getTransactions } from '../redux/selectors';
+import { getTransactions, getCategories } from '../redux/selectors';
 
-const TransactionList = ({ transactions }) => (
+const TransactionList = ({ transactions, categories }) => (
   <div>
     <ul>
       {transactions && transactions.length > 0
         ? transactions.map((transaction) => {
           const { id, category, amount } = transaction;
+          const categoryName = categories[category].name;
           return (
             <li key={id}>
-              <Transaction id={id} amount={amount} category={category} />
+              <Transaction id={id} amount={amount} category={categoryName} />
             </li>
           );
         })
@@ -22,4 +23,6 @@ const TransactionList = ({ transactions }) => (
   </div>
 );
 
-export default connect((state) => ({ transactions: getTransactions(state) }))(TransactionList);
+export default connect(
+  (state) => ({ transactions: getTransactions(state), categories: state.categories.byIds }),
+)(TransactionList);

@@ -2,11 +2,13 @@ import { ADD_CATEGORY_ENTRY, MODIFY_CATEGORY_NAME, MODIFY_CATEGORY_BALANCE, REMO
 import { filterKeyFromObject } from '../../utils/commonFunctions';
 
 const initialState = {
-  allIds: [100, 101, 102],
-  byId: {
+  allIds: [0, 100, 101, 102],
+  byIds: {
+    '-1': { name: 'Temp', balance: 0 },
+    0: { name: 'To balance', balance: 0 },
     100: { name: 'Bills', balance: 200 },
     101: { name: 'Food', balance: 540 },
-    102: { name: 'Rent', balance: 1230 },
+    102: { name: 'Rent', balance: 1430 },
   },
 };
 
@@ -17,8 +19,8 @@ export default function (state = initialState, action) {
       return {
         ...state,
         allIds: [...state.allIds, id],
-        byId: {
-          ...state.byId,
+        byIds: {
+          ...state.byIds,
           [id]: {
             name,
             balance: 0,
@@ -30,10 +32,10 @@ export default function (state = initialState, action) {
       const { id, name } = action.payload;
       return {
         ...state,
-        byId: {
-          ...state.byId,
+        byIds: {
+          ...state.byIds,
           [id]: {
-            ...state.byId[id],
+            ...state.byIds[id],
             name,
           },
         },
@@ -43,21 +45,26 @@ export default function (state = initialState, action) {
       const { id, balanceChange } = action.payload;
       return {
         ...state,
-        byId: {
-          ...state.byId,
+        byIds: {
+          ...state.byIds,
           [id]: {
-            ...state.byId[id],
-            balance: state.byId[id].balance + balanceChange,
+            ...state.byIds[id],
+            balance: (state.byIds[id].balance) + balanceChange,
           },
         },
       };
     }
     case REMOVE_CATEGORY_ENTRY: {
       const { id } = action.payload;
+
+      const byIdsCopy = {};
+      Object.assign(byIdsCopy, state.byIds);
+      delete byIdsCopy[id];
+
       return {
         ...state,
         allIds: state.allIds.filter((categoryId) => categoryId !== id),
-        byId: filterKeyFromObject(state.byId, id),
+        byIds: byIdsCopy,
       };
     }
     default:

@@ -4,10 +4,10 @@ import { filterKeyFromObject } from '../../utils/commonFunctions';
 const initialState = {
   allIds: [1000, 1001, 1002, 1003],
   byIds: {
-    1000: { category: 'Bills', amount: 100 },
-    1001: { category: 'Bills', amount: 10 },
-    1002: { category: 'Food', amount: 50 },
-    1003: { category: 'Rent', amount: 1230 },
+    1000: { category: 100, amount: 100 },
+    1001: { category: 100, amount: 10 },
+    1002: { category: 101, amount: 50 },
+    1003: { category: 102, amount: 1230 },
   },
 };
 
@@ -55,10 +55,15 @@ export default function (state = initialState, action) {
     }
     case REMOVE_TRANSACTION_ENTRY: {
       const { id } = action.payload;
+
+      const byIdsCopy = {};
+      Object.assign(byIdsCopy, state.byIds);
+      delete byIdsCopy[id];
+
       return {
         ...state,
         allIds: state.allIds.filter((transactionId) => transactionId !== id),
-        byIds: filterKeyFromObject(state.byIds, id),
+        byIds: byIdsCopy,
       };
     }
     default:
