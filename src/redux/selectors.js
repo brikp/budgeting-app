@@ -42,3 +42,17 @@ export const getCategories = (store) => (
 export const getCategoryNames = (store) => (
   getCategoryList(store).map((id) => store.categories.byIds[id].name)
 );
+
+export const getCategoriesByName = (store) => (
+  getCategoryList(store).reduce((result, categoryId) => {
+    const category = getCategoryById(store, categoryId);
+    return {
+      ...result,
+      [category.name]: {
+        id: categoryId,
+        balance: category.balance,
+        name: category.name,
+      },
+    };
+  }, {})
+);

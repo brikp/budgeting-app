@@ -1,8 +1,7 @@
-import { ADD_CATEGORY_ENTRY, MODIFY_CATEGORY_NAME, MODIFY_CATEGORY_BALANCE, REMOVE_CATEGORY_ENTRY } from '../actionTypes';
-import { filterKeyFromObject } from '../../utils/commonFunctions';
+import { ADD_CATEGORY_ENTRY, MODIFY_CATEGORY_NAME, SET_CATEGORY_BALANCE, MODIFY_CATEGORY_BALANCE, REMOVE_CATEGORY_ENTRY } from '../actionTypes';
 
 const initialState = {
-  allIds: [0, 100, 101, 102],
+  allIds: [-1, 0, 100, 101, 102],
   byIds: {
     '-1': { name: 'Temp', balance: 0 },
     0: { name: 'To balance', balance: 0 },
@@ -37,6 +36,19 @@ export default function (state = initialState, action) {
           [id]: {
             ...state.byIds[id],
             name,
+          },
+        },
+      };
+    }
+    case SET_CATEGORY_BALANCE: {
+      const { id, newBalance } = action.payload;
+      return {
+        ...state,
+        byIds: {
+          ...state.byIds,
+          [id]: {
+            ...state.byIds[id],
+            balance: newBalance,
           },
         },
       };

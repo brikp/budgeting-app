@@ -1,4 +1,4 @@
-import { addTransactionEntry, modifyTransactionCategory, modifyTransactionAmount, removeTransactionEntry, addCategoryEntry, modifyCategoryName, modifyCategoryBalance, removeCategoryEntry } from './actionsSimple';
+import { addTransactionEntry, modifyTransactionCategory, modifyTransactionAmount, removeTransactionEntry, addCategoryEntry, modifyCategoryName, setCategoryBalance as setCategoryBalanceSimple, modifyCategoryBalance, removeCategoryEntry } from './actionsSimple';
 import { getTransactionIdsOfCategory } from './selectors';
 
 
@@ -7,11 +7,11 @@ export const addIncome = (amount) => (dispatch) => {
   dispatch(modifyCategoryBalance(0, amount));
 };
 
-export const addTransaction = (category, amount) => (dispatch) => {
-  if (category === 0) dispatch(addIncome(amount));
+export const addTransaction = (categoryId, amount) => (dispatch) => {
+  if (categoryId === 0) dispatch(addIncome(amount));
   else {
-    dispatch(addTransactionEntry(category, amount));
-    dispatch(modifyCategoryBalance(category, (amount * -1)));
+    dispatch(addTransactionEntry(categoryId, amount));
+    dispatch(modifyCategoryBalance(categoryId, (amount * -1)));
   }
 };
 
@@ -47,6 +47,12 @@ export const changeCategoryBalance = (id, balanceChange) => (dispatch) => {
   // Modify base category (To budget) balance
   dispatch(modifyCategoryBalance(0, (balanceChange * -1)));
   dispatch(modifyCategoryBalance(id, balanceChange));
+};
+
+export const setCategoryBalance = (id, balance, balanceChange) => (dispatch) => {
+  // Modify base category (To budget) balance
+  dispatch(modifyCategoryBalance(0, (balanceChange * -1)));
+  dispatch(setCategoryBalanceSimple(id, balance));
 };
 
 // This seems expensive and may cause weird results for bigger dataset

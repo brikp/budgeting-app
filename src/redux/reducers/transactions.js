@@ -1,5 +1,4 @@
 import { ADD_TRANSACTION_ENTRY, MODIFY_TRANSACTION_CATEGORY, MODIFY_TRANSACTION_AMOUNT, REMOVE_TRANSACTION_ENTRY } from '../actionTypes';
-import { filterKeyFromObject } from '../../utils/commonFunctions';
 
 const initialState = {
   allIds: [1000, 1001, 1002, 1003],

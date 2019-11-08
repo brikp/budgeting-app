@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import Transaction from './Transaction';
-import { getTransactions, getCategories } from '../redux/selectors';
+import { getTransactions } from '../redux/selectors';
 
 const TransactionList = ({ transactions, categories }) => (
   <div>
@@ -22,6 +22,20 @@ const TransactionList = ({ transactions, categories }) => (
     </ul>
   </div>
 );
+
+TransactionList.propTypes = {
+  transactions: PropTypes.arrayOf(PropTypes.shape({
+    category: PropTypes.number,
+    amount: PropTypes.number,
+    id: PropTypes.number,
+  })).isRequired,
+  categories: PropTypes.shape({
+    [PropTypes.number]: PropTypes.shape({
+      name: PropTypes.string,
+      balance: PropTypes.number,
+    }),
+  }).isRequired,
+};
 
 export default connect(
   (state) => ({ transactions: getTransactions(state), categories: state.categories.byIds }),

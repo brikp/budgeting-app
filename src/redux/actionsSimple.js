@@ -1,4 +1,4 @@
-import { ADD_TRANSACTION_ENTRY, MODIFY_TRANSACTION_CATEGORY, MODIFY_TRANSACTION_AMOUNT, REMOVE_TRANSACTION_ENTRY, ADD_CATEGORY_ENTRY, MODIFY_CATEGORY_NAME, MODIFY_CATEGORY_BALANCE, REMOVE_CATEGORY_ENTRY } from './actionTypes';
+import { ADD_TRANSACTION_ENTRY, MODIFY_TRANSACTION_CATEGORY, MODIFY_TRANSACTION_AMOUNT, REMOVE_TRANSACTION_ENTRY, ADD_CATEGORY_ENTRY, MODIFY_CATEGORY_NAME, SET_CATEGORY_BALANCE, MODIFY_CATEGORY_BALANCE, REMOVE_CATEGORY_ENTRY } from './actionTypes';
 
 let nextTransactionId = 0;
 let nextCategoryId = 0;
@@ -62,6 +62,14 @@ export const modifyCategoryBalance = (id, balanceChange) => ({
   payload: {
     id,
     balanceChange,
+  },
+});
+
+export const setCategoryBalance = (id, newBalance) => ({
+  type: SET_CATEGORY_BALANCE,
+  payload: {
+    id,
+    newBalance,
   },
 });
 

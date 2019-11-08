@@ -1,13 +1,15 @@
 import React from 'react';
-import TransactionList from './TransactionList';
-import AddTransactionForm from './AddTransactionForm';
-import Test from './Test';
+import Transactions from './Transactions';
+import Categories from './Categories';
+
+import '../styles.css';
 
 const App = () => (
   <div>
-    {/* <AddTransactionForm />
-    <TransactionList /> */}
-    <Test />
+    <div className="flex">
+      <Transactions className="flex-row" />
+      <Categories className="flex-row" />
+    </div>
   </div>
 );
 
