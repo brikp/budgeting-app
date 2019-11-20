@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import Transaction from './Transaction';
-import { getTransactions } from '../redux/selectors';
+import { getTransactions } from './transactionsSlice';
 
 const TransactionList = ({ transactions, categories }) => (
   <div>

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import Category from './Category';
-import { getCategories } from '../redux/selectors';
+import { getCategories } from './categoriesSlice';
 
 const CategoryList = ({ categories }) => (
   <div>

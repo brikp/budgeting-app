@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { addTransaction } from '../redux/actionsThunk';
-import { getCategoriesByName, getCategoryNames } from '../redux/selectors';
+import { addTransaction } from './transactionsSlice';
+import { getCategoriesByName, getCategoryNames } from '../categories/categoriesSlice';
 
 const AddTransactionForm = (props) => {
   const [amount, setAmount] = React.useState(0);

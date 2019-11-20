@@ -1,6 +1,6 @@
 import React from 'react';
-import Transactions from './Transactions';
-import Categories from './Categories';
+import Transactions from '../features/transactions/Transactions';
+import Categories from '../features/categories/Categories';
 
 import '../styles.css';
 

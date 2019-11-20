@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { setCategoryBalance } from '../redux/actionsThunk';
+import { setCategoryBalance } from './categoriesSlice';
 
 const CategoryBalanceInput = ({ id, balance, toggleEditable, ...rest }) => {
   const [newBalance, setNewBalance] = useState(balance);

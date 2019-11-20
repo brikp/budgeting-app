@@ -2,8 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { addCategory } from '../redux/actionsThunk';
-import { getCategoryNames } from '../redux/selectors';
+import { addCategory, getCategoryNames } from './categoriesSlice';
 
 const AddCategoryForm = (props) => {
   const [categoryName, setCategoryName] = React.useState('');
